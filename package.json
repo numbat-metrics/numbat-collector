@@ -1,6 +1,6 @@
 {
-  "name": "metrikal",
-  "description": "npm powerful metrics",
+  "name": "numbat",
+  "description": "numbat-powered metrics",
   "version": "0.0.0",
   "author": "C J Silverio <ceejceej@gmail.com>",
   "bugs": {

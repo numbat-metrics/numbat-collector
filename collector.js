@@ -19,5 +19,8 @@ var
 
 var Collector = module.exports = function Collector(opts)
 {
+    assert(opts && _.isObject(opts), 'you must pass an options object');
+    assert(opts.listen, 'you must pass a port number in `listen`');
+    assert(opts.outputs && _.isArray(opts.outputs), 'you must pass an array of clients in `outputs`');
 
 };
