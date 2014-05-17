@@ -12,8 +12,10 @@ buffers & deals with backpressure if necessary
 
 var
     _       = require('lodash'),
-    assert  = require('assert')
-    restify = require('restify')
+    assert  = require('assert'),
+    events  = require('events'),
+    restify = require('restify'),
+    util    = require('util')
     ;
 
 

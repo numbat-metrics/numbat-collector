@@ -17,11 +17,13 @@ Each component must be simple & rock-solid. The monitoring system must be reliab
 
 ### collector
 
-The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. It receives metrics, buffers, and multiplexes out to database and to R
+The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. It receives metrics, buffers, and multiplexes out to databases and to Riemann. It manages its list of clients through a tiny http admin api.
 
 collector configuration:
 
 - logging (console, path, level)
+- metrics listen host:port
+- admin listen host:port
 - list of clients
 
 Each client has type & location information. That is, enough to instantiate the appropriate client object. Client types supported initially:
@@ -31,7 +33,7 @@ Each client has type & location information. That is, enough to instantiate the 
 
 ### emitter
 
-Emitter is a module you're intended to require anywhere you need it. Make an emitter object, hang onto it, emit metrics with it.
+[numbat-emitter](https://github.com/ceejbot/numbat-emitter) is a module you're intended to require anywhere you need it. Make an emitter object, hang onto it, emit metrics with it.
 
 emitter configuration:
 
@@ -41,8 +43,6 @@ emitter configuration:
 ## TODO
 
 Everything.
-
-- split emitter out into its own repo
 
 ## License
 

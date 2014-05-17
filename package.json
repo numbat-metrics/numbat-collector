@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "author": "C J Silverio <ceejceej@gmail.com>",
   "bugs": {
-    "url": "https://github.com/ceejbot/metrikal/issues"
+    "url": "https://github.com/ceejbot/numbat-collector/issues"
   },
   "dependencies": {
     "bunyan": "^0.22.3",
@@ -16,12 +16,15 @@
     "riemann": "^0.4.0"
   },
   "devDependencies": {
+    "jscs": "^1.2.4",
+    "jshint": "^2.5.1",
     "lab": "^3.1.1",
     "must": "^0.11.0"
   },
-  "homepage": "https://github.com/ceejbot/metrikal",
+  "homepage": "https://github.com/ceejbot/numbat-collector",
   "keywords": [
     "metrics",
+    "influxdb",
     "riemann",
     "monitoring"
   ],
@@ -29,9 +32,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ceejbot/metrikal.git"
+    "url": "git://github.com/ceejbot/numbat-collector.git"
   },
   "scripts": {
-    "test": "lab -v -c test/test*.js"
+    "start": "node bin/run-server.js",
+    "dev": "NODE_ENV=dev bin/run-server.js",
+    "test-suite": "lab -v -t 70 -c test/*.js",
+    "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",
+    "check-style": "jscs *.js lib/*.js examples/*.js test/*.js",
+    "test": "npm run check-hint && npm run check-style && npm run test-suite"
   }
 }
