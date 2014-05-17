@@ -1,0 +1,32 @@
+{
+  "name": "metrikal",
+  "description": "npm powerful metrics",
+  "version": "0.0.0",
+  "author": "C J Silverio <ceejceej@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ceejbot/metrikal/issues"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "riemann": "^0.4.0"
+  },
+  "devDependencies": {
+    "lab": "^3.1.1",
+    "must": "^0.11.0"
+  },
+  "homepage": "https://github.com/ceejbot/metrikal",
+  "keywords": [
+    "metrics",
+    "riemann",
+    "monitoring"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ceejbot/metrikal.git"
+  },
+  "scripts": {
+    "test": "lab -v -c test/test*.js"
+  }
+}
