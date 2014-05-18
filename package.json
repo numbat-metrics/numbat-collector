@@ -14,7 +14,6 @@
     "bunyan-prettystream": "^0.1.3",
     "dashdash": "^1.5.0",
     "influx": "^0.4.0",
-    "json-stream": "^0.2.0",
     "lodash": "^2.4.1",
     "restify": "^2.8.1",
     "riemann": "^0.4.0"
