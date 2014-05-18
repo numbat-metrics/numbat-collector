@@ -22,18 +22,19 @@ module.exports =
 {
     logging:
     {
+        name: 'numbat-1',
         console: true,
-        path: '/var/log/numbatd/'
+        path: '/var/log/numbatd'
     },
-    listen: '0.0.0.0:3333',
-    admin_api: 'localhost:3000',
-    clients:
+    metrics: { host: 'localhost', port: 3333 },
+    admin:   { host: 'localhost', port: 3334 },
+    outputs:
     [
-        { type: 'riemann', host: 'example.com', port: 5555 },
-        { type: 'influxdb', hosts: ['influx1.example.com', 'influx2.example.com'], port: 8086,
-          user: 'numbat', pass: 'my-top-secret', db: 'numbat' }
+        { type: 'riemann',  host: 'localhost',     port: 5555 },
+        { type: 'influxdb', hosts: ['localhost'],  port: 8086,
+        user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
-}
+};
 ```
 
 ## Design notes
@@ -54,7 +55,7 @@ Everything.
 
 ## Contributing
 
-Sure! Write tests with [Lab](https://www.npmjs.org/package/lab) & [must](https://www.npmjs.org/package/must). Use BSD/Allman bracing or I will stare at you funny.
+Sure! Write tests with [Lab](https://www.npmjs.org/package/lab) & [must](https://www.npmjs.org/package/must). Use BSD/Allman bracing or I will stare at you funny and not take your pull request.
 
 ## License
 

@@ -13,5 +13,4 @@ module.exports =
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
         user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
-
 };
