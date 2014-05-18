@@ -3,6 +3,9 @@
   "description": "numbat-powered metrics",
   "version": "0.0.0",
   "author": "C J Silverio <ceejceej@gmail.com>",
+  "bin": {
+    "numbatd": "./bin/run-server.js"
+  },
   "bugs": {
     "url": "https://github.com/ceejbot/numbat-collector/issues"
   },
@@ -12,6 +15,7 @@
     "dashdash": "^1.5.0",
     "influx": "^0.4.0",
     "lodash": "^2.4.1",
+    "objectstream": "0.0.4",
     "restify": "^2.8.1",
     "riemann": "^0.4.0"
   },

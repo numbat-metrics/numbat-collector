@@ -7,7 +7,7 @@ var
     demand      = require('must')
     ;
 
-describe('collector', function()
+describe('riemann client', function()
 {
     it('should have tests');
 });
