@@ -39,11 +39,11 @@
     "url": "git://github.com/ceejbot/numbat-collector.git"
   },
   "scripts": {
-    "start": "node bin/run-server.js",
-    "dev": "NODE_ENV=dev bin/run-server.js",
-    "test-suite": "lab -v -t 70 -c test/*.js",
+    "start": "node bin/run-server.js config.js",
+    "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js",
+    "test-suite": "npm run check-hint && npm run check-style && npm test",
     "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",
     "check-style": "jscs *.js lib/*.js examples/*.js test/*.js",
-    "test": "npm run check-hint && npm run check-style && npm run test-suite"
+    "test": "lab -v -t 70 -c test/*.js"
   }
 }

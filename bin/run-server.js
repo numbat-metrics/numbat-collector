@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
 var
-    dashdash = require('dashdash'),
-    Numbat   = require('../index')
+    Numbat       = require('../index'),
+    createLogger = require('../lib/logging')
+    path         = require('path')
     ;
 
-// parse command-line options
-// load config if requested
-// start server
-// etc
+var config = require(path.resolve(process.argv[2]));
+config.log = createLogger(config.logging);
+
+var server = new Numbat(config);
+server.listen();
