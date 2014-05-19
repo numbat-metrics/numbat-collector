@@ -4,8 +4,6 @@
 
 ## How to
 
-You must previously have set up [Riemann](http://riemann.io) and [InfluxDB](http://influxdb.org/).
-
 You can add [numbat-emitter](https://github.com/ceejbot/numbat-emitter) into any existing node program. Or you can use it in a standalone program triggered by cron. See the examples.
 
 ### Running
@@ -15,7 +13,7 @@ You can add [numbat-emitter](https://github.com/ceejbot/numbat-emitter) into any
 > numbatd configuration.js
 ```
 
-Configuration TBD but it's probably going to look like this:
+The configuration file looks like this:
 
 ```javascript
 module.exports =
@@ -30,12 +28,21 @@ module.exports =
     admin:   { host: 'localhost', port: 3334 },
     outputs:
     [
+        { type: 'log', name: 'numbat-1', path: './numbat.log' },
         { type: 'riemann',  host: 'localhost',     port: 5555 },
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
         user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
 };
 ```
+
+## Outputs
+
+* [InfluxDB](http://influxdb.org/)
+* [Riemann](http://riemann.io)
+* a json-formatted logfile (using [bole](https://github.com/rvagg/bole))
+
+I'll probably add support for [Godot](https://github.com/nodejitsu/godot) as part of evaluating that package.
 
 ## Design notes
 
