@@ -10,6 +10,7 @@ module.exports =
     outputs:
     [
         { type: 'riemann',  host: 'localhost',     port: 5555 },
+        { type: 'log', name: 'numbat-1', path: './numbat.log' },
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
         user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
