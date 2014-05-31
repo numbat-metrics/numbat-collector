@@ -5,11 +5,11 @@ module.exports =
         name: 'numbat-1',
         console: true,
     },
-    metrics: { host: 'localhost', port: 3333 },
-    admin:   { host: 'localhost', port: 3334 },
+    metrics: { host: 'localhost', port: 3335 },
+    admin:   { host: 'localhost', port: 3336 },
     outputs:
     [
-        { type: 'riemann',  host: 'localhost',     port: 5555 },
+        { type: 'analyzer',  host: 'localhost', port: 5556 },
         { type: 'log', name: 'numbat-1', path: './numbat.log' },
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
         user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }

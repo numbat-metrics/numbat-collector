@@ -1,5 +1,6 @@
-var Numbat  = require('./lib/collector');
-Numbat.InfluxClient = require('./lib/output-influx');
-Numbat.RiemannClient = require('./lib/output-riemann');
+var Numbat            = require('./lib/collector');
+Numbat.InfluxOutput   = require('./lib/output-influx');
+Numbat.LogOutput      = require('./lib/output-logfile');
+Numbat.AnalyzerOutput = require('./lib/output-analyzer');
 
 module.exports = Numbat;

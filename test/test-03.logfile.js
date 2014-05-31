@@ -7,7 +7,7 @@ var
     demand      = require('must')
     ;
 
-describe('riemann client', function()
+describe('logfile output', function()
 {
     it('should have tests');
 });

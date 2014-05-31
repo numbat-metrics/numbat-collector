@@ -1,10 +1,10 @@
 # Numbat
 
-[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-powered metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Riemann](http://riemann.io) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all. It merely multiplexes & buffers when necessary.
+[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-powered metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Numbat-Analyzer](https://github.com/ceejbot/numbat-analyzer) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all. It merely multiplexes & buffers when necessary.
 
-## How to
+The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. It receives metrics, buffers, and multiplexes out to databases and to the numbat analyzer/alert service. It manages its list of clients through a tiny http admin api.
 
-You can add [numbat-emitter](https://github.com/ceejbot/numbat-emitter) into any existing node program. Or you can use it in a standalone program triggered by cron. See the examples.
+See [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer) for more information on the system.
 
 ### Running
 
@@ -29,7 +29,7 @@ module.exports =
     outputs:
     [
         { type: 'log', name: 'numbat-1', path: './numbat.log' },
-        { type: 'riemann',  host: 'localhost',     port: 5555 },
+        { type: 'analyzer',  host: 'localhost', port: 5555 },
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
         user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
@@ -39,26 +39,8 @@ module.exports =
 ## Outputs
 
 * [InfluxDB](http://influxdb.org/)
-* [Riemann](http://riemann.io)
+* [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer)
 * a json-formatted logfile (using [bole](https://github.com/rvagg/bole))
-
-I'll probably add support for [Godot](https://github.com/nodejitsu/godot) as part of evaluating that package.
-
-## Design notes
-
-*Numbat* is a collection of conveniences for getting interesting data from node.js services into a monitoring system and a database for historical analysis.
-
-### collector
-
-The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. It receives metrics, buffers, and multiplexes out to databases and to Riemann. It manages its list of clients through a tiny http admin api. You can, if you wish, send events to several instances of Riemann.
-
-### emitter
-
-[numbat-emitter](https://github.com/ceejbot/numbat-emitter) is a module you're intended to require anywhere you need it. Make an emitter object, hang onto it, emit metrics with it.
-
-## TODO
-
-Everything.
 
 ## Contributing
 
