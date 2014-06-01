@@ -41,9 +41,9 @@ module.exports =
 
 ## Outputs
 
-* [InfluxDB](http://influxdb.org/)
-* [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer)
-* a json-formatted logfile (using [bole](https://github.com/rvagg/bole))
+* [InfluxDB](http://influxdb.org/): a time-series database that can drive interesting dashboards.
+* [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer): the alerting & monitoring component of the numbat-powered metrics system.
+* a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
 
 ## Contributing
 
