@@ -6,6 +6,9 @@ The collector is a service. You are intended to run it anywhere you like, perhap
 
 See [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer) for more information on the system.
 
+[![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector)  
+[![Dependencies](https://david-dm.org/ceejbot/numbat-collector.png)](https://david-dm.org/ceejbot/numbat-collector)
+
 ### Running
 
 ```shell
