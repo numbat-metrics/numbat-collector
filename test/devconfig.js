@@ -5,7 +5,7 @@ module.exports =
         name: 'numbat-1',
         console: true,
     },
-    metrics: { host: 'localhost', port: 3335 },
+    incoming: { path: '/tmp/numbat.sock' },
     admin:   { host: 'localhost', port: 3336 },
     outputs:
     [
