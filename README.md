@@ -27,14 +27,13 @@ module.exports =
         console: true,
         path: '/var/log/numbatd'
     },
-    metrics: { host: 'localhost', port: 3333 },
-    admin:   { host: 'localhost', port: 3334 },
+    listen: { host: 'localhost', port: 3333 },
     outputs:
     [
         { type: 'log', name: 'numbat-1', path: './numbat.log' },
         { type: 'analyzer',  host: 'localhost', port: 5555 },
         { type: 'influxdb', hosts: ['localhost'],  port: 8086,
-        user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
+          user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
     ]
 };
 ```
