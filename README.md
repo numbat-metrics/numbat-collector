@@ -7,8 +7,8 @@ See [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer) for more infor
 The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. You could run one on every hosts where you run services and communicate with it using a socket. Or you could run a few collectors and communicate using TCP.
 
 [![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector)
-[![Dependencies](https://david-dm.org/ceejbot/numbat-collector.png)](https://david-dm.org/ceejbot/numbat-collector)
-[![NPM](https://nodei.co/npm/numbat-collector.svg)](https://nodei.co/npm/numbat-collector/)
+[![Dependencies](https://david-dm.org/ceejbot/numbat-collector.svg)](https://david-dm.org/ceejbot/numbat-collector)
+[![NPM](https://nodei.co/npm/numbat-collector.png)](https://nodei.co/npm/numbat-collector/)
 
 Definitely pre 1.0; many error cases unhandled as yet.
 
