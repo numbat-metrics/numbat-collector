@@ -10,6 +10,8 @@ The collector is a service. You are intended to run it anywhere you like, perhap
 [![Dependencies](https://david-dm.org/ceejbot/numbat-collector.png)](https://david-dm.org/ceejbot/numbat-collector)
 [![NPM](https://nodei.co/npm/numbat-collector.svg)](https://nodei.co/npm/numbat-collector/)
 
+Definitely pre 1.0; many error cases unhandled as yet.
+
 ### Running
 
 ```shell
@@ -33,8 +35,17 @@ module.exports =
     [
         { type: 'log', name: 'numbat-1', path: './numbat.log' },
         { type: 'analyzer',  host: 'localhost', port: 5555 },
-        { type: 'influxdb', hosts: ['localhost'],  port: 8086,
-          user: 'numbat',   pass: 'my-top-secret', db: 'numbat' }
+        {
+            type: 'influxdb',
+            hosts:
+            [
+                { host: 'influx-1.example.com',  port: 8086 },
+                { host: 'influx-2.example.com',  port: 8086 },
+            ],
+            username: 'numbat',
+            password: 'my-top-secret',
+            database: 'numbat'
+        }
     ]
 };
 ```
