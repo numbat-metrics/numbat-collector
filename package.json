@@ -1,6 +1,6 @@
 {
-  "name": "numbat",
-  "description": "numbat-powered metrics",
+  "name": "numbat-collector",
+  "description": "numbat-powered metrics collector & redirector",
   "version": "0.0.1",
   "author": "C J Silverio <ceejceej@gmail.com>",
   "bin": {
