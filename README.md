@@ -1,13 +1,14 @@
 # Numbat
 
-[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-powered metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Numbat-Analyzer](https://github.com/ceejbot/numbat-analyzer) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all. It merely multiplexes & buffers when necessary.
-
-The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. It receives metrics, buffers, and multiplexes out to databases and to the numbat analyzer/alert service. It manages its list of clients through a tiny http admin api.
+[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-powered metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Numbat-Analyzer](https://github.com/ceejbot/numbat-analyzer) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all (yet). It merely multiplexes & buffers when necessary.
 
 See [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer) for more information on the system.
 
-[![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector)  
+The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. You could run one on every hosts where you run services and communicate with it using a socket. Or you could run a few collectors and communicate using TCP.
+
+[![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector)
 [![Dependencies](https://david-dm.org/ceejbot/numbat-collector.png)](https://david-dm.org/ceejbot/numbat-collector)
+[![NPM](https://nodei.co/npm/numbat-collector.svg)](https://nodei.co/npm/numbat-collector/)
 
 ### Running
 

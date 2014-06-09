@@ -21,20 +21,11 @@ describe('influx client', function()
 {
     var mockopts =
     {
-        hosts: ['localhost'],
-        port:  8086,
-        user:  'numbat',
-        pass:  'my-top-secret',
-        db:    'numbat'
+        hosts:    [{ host: 'localhost', port:  8086 }],
+        username: 'numbat',
+        password: 'my-top-secret',
+        database: 'numbat'
     };
-
-/*
-    assert(opts.hosts && _.isArray(opts.hosts), 'you must pass an array in the `hosts` option');
-    assert(opts.port && _.isNumber(opts.port), 'you must pass a `port` option');
-    assert(opts.user && _.isString(opts.user), 'you must pass a `user` option');
-    assert(opts.pass && _.isString(opts.pass), 'you must pass a `pass` option');
-    assert(opts.db && _.isString(opts.db), 'you must pass a `db` option');
-*/
 
     it('demands an options object', function(done)
     {
@@ -50,17 +41,10 @@ describe('influx client', function()
         done();
     });
 
-    it('demands a numeric port option', function(done)
-    {
-        function shouldThrow() { return new Influx({ hosts: ['localhost'] }); }
-        shouldThrow.must.throw(/port/);
-        done();
-    });
-
-    it('demands a user option', function(done)
+    it('demands a username option', function(done)
     {
         function shouldThrow() { return new Influx({ hosts: ['localhost'], port: 8086 }); }
-        shouldThrow.must.throw(/user/);
+        shouldThrow.must.throw(/username/);
         done();
     });
 
@@ -68,22 +52,24 @@ describe('influx client', function()
     {
         function shouldThrow() { return new Influx({
             hosts: ['localhost'],
-            port: 8086,
-            user: 'foo',
+            username: 'foo',
         }); }
-        shouldThrow.must.throw(/pass/);
+        shouldThrow.must.throw(/password/);
         done();
     });
 
-    it('demands a db option', function(done)
+    it('demands a database option', function(done)
     {
-        function shouldThrow() { return new Influx({
-            hosts:    ['localhost'],
-            port:     8086,
-            user:     'foo',
-            pass: 'password'
-        }); }
-        shouldThrow.must.throw(/db/);
+        function shouldThrow()
+        {
+            return new Influx(
+            {
+                hosts:    [ { host:'localhost', port:8086}],
+                username: 'foo',
+                password: 'password'
+            });
+        }
+        shouldThrow.must.throw(/database/);
         done();
     });
 
