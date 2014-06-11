@@ -12,7 +12,7 @@
   "dependencies": {
     "bole": "^0.1.0",
     "dashdash": "^1.6.0",
-    "influx": "^1.0.0",
+    "influx": "^1.0.1",
     "json-stream": "^0.2.1",
     "lodash": "^2.4.1",
     "replify": "^1.2.0"
@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "node bin/run-server.js config.js",
-    "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js",
+    "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js | bistre",
     "test-suite": "npm run check-hint && npm test",
     "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",
     "test": "lab -v -t 70 -c test/*.js"
