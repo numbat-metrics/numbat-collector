@@ -32,13 +32,6 @@ describe('logfile output', function()
         done();
     });
 
-    it('demands a path object', function(done)
-    {
-        function shouldThrow() { return new LogOutput({}); }
-        shouldThrow.must.throw(/path/);
-        done();
-    });
-
     it('demands a name object', function(done)
     {
         function shouldThrow() { return new LogOutput({ path: '../tmp'}); }
@@ -78,6 +71,15 @@ describe('logfile output', function()
                 written.test.must.equal('yes');
                 done();
             });
+        });
+    });
+
+    it('the path option is optional', function(done)
+    {
+        var consoleOut = new LogOutput({ name: 'test-2' });
+        output.write({ test: 'yes'}, function()
+        {
+            done();
         });
     });
 
