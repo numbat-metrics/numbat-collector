@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "node bin/run-server.js config.js",
-    "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js | bistre",
+    "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js",
     "udp": "NODE_ENV=dev bin/run-server.js test/udpconf.js",
     "test-suite": "npm run check-hint && npm test",
     "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",

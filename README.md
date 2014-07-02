@@ -50,6 +50,20 @@ module.exports =
 };
 ```
 
+The configuration options are described in more detail below.
+
+### Logging options
+
+* `console: true`: output to the console
+* `NODE_ENV=dev` set in environment: log to console, pretty-printed (no need to pipe to bistre)
+* `path: '/path/to/directory'`: log to a file in the given directory. The file will be named `name.log`, where 'name' is whatever you specified in that field.
+
+### Listen options
+
+* `listen: { host: '0.0.0.0', port: 3333 }` -- listen for incoming data over tcp on the given port 
+* `listen: { host: 'localhost', port: 3333, udp: true }` -- listen for udp data
+* `listen: { path: '/path/to/foo.sock' }` -- connect to the given unix domain socket
+
 ## Outputs
 
 * [InfluxDB](http://influxdb.org/): a time-series database that can drive interesting dashboards.
