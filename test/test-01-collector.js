@@ -1,11 +1,12 @@
 'use strict';
 
 var
-    lab       = require('lab'),
-    describe  = lab.describe,
-    it        = lab.it,
-    demand    = require('must'),
-    Numbat = require('../index')
+    Lab      = require('lab'),
+    lab      = exports.lab = Lab.script(),
+    describe = lab.describe,
+    it       = lab.it,
+    demand   = require('must'),
+    Numbat   = require('../index')
     ;
 
 describe('collector', function()

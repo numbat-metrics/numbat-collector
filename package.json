@@ -10,17 +10,18 @@
     "url": "https://github.com/ceejbot/numbat-collector/issues"
   },
   "dependencies": {
-    "bole": "~1.0.0",
-    "dashdash": "~1.7.0",
+    "bistre": "~1.0.1",
+    "bole": "~2.0.0",
+    "dashdash": "~1.7.2",
     "influx": "~2.0.0",
-    "json-stream": "^0.2.2",
+    "json-stream": "~1.0.0",
     "lodash": "^2.4.1",
     "replify": "^1.2.0"
   },
   "devDependencies": {
     "bistre": "~1.0.0",
     "jshint": "~2.5.6",
-    "lab": "^3.2.3",
+    "lab": "~5.2.1",
     "mkdirp": "^0.5.0",
     "must": "^0.12.0",
     "repl-client": "^0.3.0",
@@ -45,6 +46,6 @@
     "udp": "NODE_ENV=dev bin/run-server.js test/udpconf.js",
     "test-suite": "npm run check-hint && npm test",
     "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",
-    "test": "lab -v -t 70 -c test/*.js"
+    "test": "lab -v -t 70 --globals '$$bole' -c test/*.js"
   }
 }
