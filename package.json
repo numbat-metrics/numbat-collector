@@ -13,19 +13,38 @@
     "bistre": "~1.0.1",
     "bole": "~2.0.0",
     "dashdash": "~1.8.0",
-    "influx": "~2.0.0",
+    "influx": "~3.3.0",
     "json-stream": "~1.0.0",
     "lodash": "~3.6.0",
     "replify": "^1.2.0"
   },
+  "config": {
+    "blanket": {
+      "pattern": [
+        "lib",
+        "index.js"
+      ],
+      "data-cover-never": [
+        "node_modules",
+        "test"
+      ],
+      "output-reporter": "spec",
+      "travis-cov": {
+        "threshold": 50
+      }
+    }
+  },
   "devDependencies": {
     "bistre": "~1.0.0",
-    "jshint": "~2.5.6",
-    "lab": "~5.2.1",
+    "jshint": "~2.6.3",
     "mkdirp": "^0.5.0",
+    "mocha": "~2.2.1",
+    "mocoverage": "~1.0.0",
     "must": "^0.12.0",
+    "patched-blanket": "~1.0.1",
     "repl-client": "^0.3.0",
-    "rimraf": "~2.3.2"
+    "rimraf": "~2.3.2",
+    "travis-cov": "~0.2.5"
   },
   "homepage": "https://github.com/ceejbot/numbat-collector",
   "keywords": [
@@ -44,8 +63,10 @@
     "start": "node bin/run-server.js config.js",
     "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js",
     "udp": "NODE_ENV=dev bin/run-server.js test/udpconf.js",
-    "test-suite": "npm run check-hint && npm test",
-    "check-hint": "jshint *.js lib/*.js examples/*.js test/*.js",
-    "test": "lab -v -t 70 --globals '$$bole' -c test/*.js"
+    "test-suite": "npm run lint && npm test && npm test-cov",
+    "lint": "jshint *.js lib/*.js test/*.js",
+    "test": "mocha -t 5000 --check-leaks --ui exports --require patched-blanket -R mocoverage test/test-*.js",
+    "test-cov": "mocha -t 5000 --require patched-blanket -R travis-cov test/test-*.js",
+    "test-travis": "mocha -R spec -t 5000 test/test-*.js"
   }
 }

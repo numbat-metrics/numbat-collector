@@ -1,16 +1,13 @@
+/*global describe:true, it:true, before:true, after:true, beforeEach: true, afterEach:true */
 'use strict';
 
 var
-    Lab      = require('lab'),
-    lab      = exports.lab = Lab.script(),
-    describe = lab.describe,
-    it       = lab.it,
     demand   = require('must'),
     Influx   = require('../lib/output-influx')
     ;
 
 
-function MockClient() {};
+function MockClient() {}
 MockClient.prototype.writePoint = function writePoint(n, p, cb)
 {
     this.name = n;

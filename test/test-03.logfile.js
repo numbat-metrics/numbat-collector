@@ -1,10 +1,7 @@
+/*global describe:true, it:true, before:true, after:true, beforeEach: true, afterEach:true */
 'use strict';
 
 var
-    Lab       = require('lab'),
-    lab       = exports.lab = Lab.script(),
-    describe  = lab.describe,
-    it        = lab.it,
     demand    = require('must'),
     bole      = require('bole'),
     fs        = require('fs'),
@@ -21,7 +18,7 @@ describe('logfile output', function()
     var output;
     var mockopts = { path: path.join(tmpdir, 'foo.log'), name: 'test-1' };
 
-    lab.before(function(done)
+    before(function(done)
     {
         mkdirp(tmpdir, done);
     });
@@ -91,7 +88,7 @@ describe('logfile output', function()
         done();
     });
 
-    lab.after(function(done)
+    after(function(done)
     {
         rimraf(tmpdir, done);
     });
