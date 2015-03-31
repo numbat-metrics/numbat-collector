@@ -7,7 +7,6 @@ var
     Influx = require('../lib/output-influx')
     ;
 
-
 function MockClient() {}
 MockClient.prototype.writePoint = function writePoint(n, p, cb)
 {
