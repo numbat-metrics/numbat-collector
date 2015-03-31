@@ -2,8 +2,9 @@
 'use strict';
 
 var
-    demand   = require('must'),
-    Influx   = require('../lib/output-influx')
+    _      = require('lodash'),
+    demand = require('must'),
+    Influx = require('../lib/output-influx')
     ;
 
 
@@ -12,8 +13,17 @@ MockClient.prototype.writePoint = function writePoint(n, p, cb)
 {
     this.name = n;
     this.point = p;
-    cb();
+    process.nextTick(cb);
 };
+
+function writePointFail(n, p, cb)
+{
+    process.nextTick(function()
+    {
+        cb(new Error('oh dear I failed'));
+    });
+};
+
 
 describe('influx client', function()
 {
@@ -71,13 +81,28 @@ describe('influx client', function()
         done();
     });
 
-    it('must be a writable stream', function(done)
+    it('defaults requestTimeout to 65 seconds', function()
+    {
+        var output = new Influx(mockopts);
+        output.options.requestTimeout.must.equal(65000);
+        output.client.request.defaultRequestOptions.timeout.must.equal(65000);
+    });
+
+    it('respects a requestTimeout option if you provide one', function()
+    {
+        var opts = _.clone(mockopts);
+        opts.requestTimeout = 50;
+        var output = new Influx(opts);
+        output.options.requestTimeout.must.equal(50);
+        output.client.request.defaultRequestOptions.timeout.must.equal(50);
+    });
+
+    it('must be a writable stream', function()
     {
         var output = new Influx(mockopts);
         output.must.be.an.object();
         output.must.have.property('writable');
         output.writable.must.be.true();
-        done();
     });
 
     it('creates an InfluxDB client', function(done)
@@ -111,6 +136,29 @@ describe('influx client', function()
             output.client.point.must.eql({ name: 'test', value: 4 });
             done();
         });
+    });
+
+    it('handles failures by logging', function(done)
+    {
+        var output = new Influx(mockopts);
+        output.client = new MockClient();
+        output.client.writePoint = writePointFail;
+
+        var count = 0;
+        output.log.error = function()
+        {
+            count++;
+            if (count === 1)
+                arguments[0].must.equal('failure writing a point to influx:')
+            if (count === 2)
+            {
+                arguments[0].must.be.instanceof(Error);
+                arguments[0].message.must.equal('oh dear I failed');
+                done();
+            }
+        };
+
+        output.write({ name: 'test', value: 4 }, function() { });
     });
 
 });
