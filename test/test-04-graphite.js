@@ -74,7 +74,7 @@ describe('graphite output', function()
 
         output.socket.send = function(data, start, length, port, host, cb)
         {
-            data.must.be.a.string();
+            Buffer.isBuffer(data).must.be.true();
             start.must.equal(0);
             length.must.equal(data.length);
             port.must.equal(goodOpts.port);
