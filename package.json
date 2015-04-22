@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "bistre": "~1.0.0",
+    "jscs": "~1.12.0",
     "jshint": "~2.7.0",
     "mkdirp": "~0.5.0",
     "mocha": "~2.2.4",
@@ -65,7 +66,7 @@
     "dev": "NODE_ENV=dev bin/run-server.js test/devconfig.js",
     "udp": "NODE_ENV=dev bin/run-server.js test/udpconf.js",
     "test-suite": "npm run lint && npm test && npm test-cov",
-    "lint": "jshint *.js lib/*.js test/*.js",
+    "lint": "jshint *.js lib/*.js test/*.js && jscs lib test *.js",
     "test": "mocha -t 5000 --check-leaks --ui exports --require patched-blanket -R mocoverage test/test-*.js",
     "test-cov": "mocha -t 5000 --require patched-blanket -R travis-cov test/test-*.js",
     "test-travis": "mocha -R spec -t 5000 test/test-*.js"
