@@ -2,12 +2,40 @@
 'use strict';
 
 var
-	demand   = require('must'),
-	Numbat   = require('../index')
+	demand = require('must'),
+	sinon  = require('sinon'),
+	Numbat = require('../index')
 	;
 
 describe('collector', function()
 {
+	var udpOpts =
+	{
+		listen:
+		{
+			udp:  true,
+			port: 4677,
+			host: 'localhost'
+		},
+		outputs: []
+	};
+
+	var socketOpts =
+	{
+		listen: { path: '/tmp/numbat.sock' },
+		outputs: []
+	};
+
+	var tcpOpts =
+	{
+		listen:
+		{
+			port: 4677,
+			host: 'localhost'
+		},
+		outputs: []
+	};
+
 	describe('exports', function()
 	{
 		it('exports a function', function(done)
@@ -69,6 +97,68 @@ describe('collector', function()
 	});
 
 	describe('listen()', function()
+	{
+		it('listens on tcp if appropriate', function(done)
+		{
+			var collector = new Numbat(tcpOpts);
+			var spy = sinon.spy(collector.incoming, 'listen');
+
+			collector.listen(function()
+			{
+				spy.called.must.be.true();
+				spy.calledWith(tcpOpts.listen.port, tcpOpts.listen.host).must.be.true;
+				collector.destroy(done);
+			});
+		});
+
+		it('connects to a socket if passed a path', function(done)
+		{
+			var collector = new Numbat(socketOpts);
+			var spy = sinon.spy(collector.incoming, 'listen');
+
+			collector.listen(function()
+			{
+				spy.called.must.be.true();
+				spy.calledWith(tcpOpts.listen.path).must.be.true;
+				collector.destroy(done);
+			});
+		});
+
+		it('calls bind if udp is set', function(done)
+		{
+			var collector = new Numbat(udpOpts);
+			var spy = sinon.spy(collector, 'bind');
+			var spy2 = sinon.spy(collector.incoming, 'bind');
+
+			collector.listen();
+			spy.called.must.be.true();
+			spy2.calledWith(udpOpts.listen.port, udpOpts.listen.host).must.be.true;
+
+			collector.destroy(done);
+		});
+	});
+
+	describe('destroy()', function()
+	{
+		it('should have tests');
+	});
+
+	describe('onConnection()', function()
+	{
+		it('should have tests');
+	});
+
+	describe('bind()', function()
+	{
+		it('should have tests');
+	});
+
+	describe('createUDPListener()', function()
+	{
+		it('should have tests');
+	});
+
+	describe('onUDPPacket()', function()
 	{
 		it('should have tests');
 	});
