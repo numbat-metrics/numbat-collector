@@ -134,7 +134,8 @@ describe('collector', function()
 			spy.called.must.be.true();
 			spy2.calledWith(udpOpts.listen.port, udpOpts.listen.host).must.be.true;
 
-			collector.destroy(done);
+			collector.destroy();
+			done();
 		});
 	});
 
