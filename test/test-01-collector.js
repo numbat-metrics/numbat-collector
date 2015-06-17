@@ -5,7 +5,7 @@ var
 	demand = require('must'),
 	sinon  = require('sinon'),
 	Numbat = require('../index')
-	;
+;
 
 describe('collector', function()
 {

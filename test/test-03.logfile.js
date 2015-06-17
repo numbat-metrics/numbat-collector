@@ -9,7 +9,7 @@ var
 	mkdirp    = require('mkdirp'),
 	path      = require('path'),
 	rimraf    = require('rimraf')
-	;
+;
 
 var tmpdir = './tmp';
 

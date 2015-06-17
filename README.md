@@ -25,8 +25,7 @@ module.exports =
     logging:
     {
         name: 'numbat-1',
-        console: true,
-        path: '/var/log/numbatd'
+        silent: false
     },
     listen: { host: 'localhost', port: 3333 },
     outputs:
@@ -43,7 +42,8 @@ module.exports =
             username: 'numbat',
             password: 'my-top-secret',
             database: 'numbat'
-        }
+        },
+        { type: 'prettylog', name: 'foobar' },
     ]
 };
 ```
@@ -53,6 +53,7 @@ The configuration options are described in more detail below.
 ### Logging options
 
 * `console: true`: output to the console
+* `silent: true`: no logging at all
 * `NODE_ENV=dev` set in environment: log to console, pretty-printed (no need to pipe to bistre)
 * `path: '/path/to/directory'`: log to a file in the given directory. The file will be named `name.log`, where 'name' is whatever you specified in that field.
 
@@ -64,9 +65,13 @@ The configuration options are described in more detail below.
 
 ## Outputs
 
-* [InfluxDB](http://influxdb.org/): a time-series database that can drive interesting dashboards.
-* [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer): the alerting & monitoring component of the numbat-powered metrics system.
-* a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
+* `influx`: [InfluxDB](http://influxdb.org/): a time-series database that can drive interesting dashboards.
+* `logfile`: a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
+* `prettylog`: a pretty-formatted colorized console log
+* `analyzer`: [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
+* `graphite`: Graphite
+* `jut`: [Jut.io](http://www.jut.io)
+
 
 ## Contributing
 

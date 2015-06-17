@@ -3,7 +3,7 @@ module.exports =
 	logging:
 	{
 		name: 'numbat-1',
-		console: true,
+		silent: false,
 	},
 	listen: { path: '/tmp/numbat.sock' },
 	outputs:

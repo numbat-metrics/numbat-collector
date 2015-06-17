@@ -3,7 +3,7 @@ module.exports =
 	logging:
 	{
 		name: 'numbat-1',
-		console: true,
+		silent: false,
 	},
 	listen:
 	{
@@ -12,6 +12,6 @@ module.exports =
 	},
 	outputs:
 	[
-		{ type: 'log', name: 'numbat-1', console: true },
+		{ type: 'logfile', name: 'numbat-1' },
 	]
 };
