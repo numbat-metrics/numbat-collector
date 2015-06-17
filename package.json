@@ -64,6 +64,8 @@
   "scripts": {
     "start": "node bin/run-server.js config.js",
     "dev": "NODE_ENV=dev bin/run-server.js test/configs/devconfig.js",
+    "socket": "NODE_ENV=dev bin/run-server.js test/configs/socket-pretty.js",
+    "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
     "udp": "NODE_ENV=dev bin/run-server.js test/configs/udp-file.js",
     "udp-pretty": "NODE_ENV=dev bin/run-server.js test/configs/udp-pretty.js",
     "test-suite": "npm run lint && npm test && npm test-cov",
