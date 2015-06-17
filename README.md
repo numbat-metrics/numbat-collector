@@ -44,7 +44,7 @@ module.exports =
             database: 'numbat'
         },
         { type: 'prettylog', name: 'foobar' },
-        { type: 'jut', app_id: 'appid', target: 'http://uri-of-collector' },
+        { type: 'jut', target: 'http://uri-of-collector', batchSize: 500 },
         { type: 'graphite', host: 'localhost', port: 3333 },
     ]
 };

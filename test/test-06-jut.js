@@ -15,7 +15,6 @@ describe('jut output', function()
 	{
 		target:    'http://localhost:3030',
 		batchSize: 500,
-		app_id:    'test'
 	};
 
 	it('demands an options object', function()
@@ -24,15 +23,9 @@ describe('jut output', function()
 		shouldThrow.must.throw(/options/);
 	});
 
-	it('demands an app_id option', function()
-	{
-		function shouldThrow() { return new Output({ }); }
-		shouldThrow.must.throw(/app_id/);
-	});
-
 	it('demands a target option', function()
 	{
-		function shouldThrow() { return new Output({ app_id: 'test' }); }
+		function shouldThrow() { return new Output({ }); }
 		shouldThrow.must.throw(/target/);
 	});
 
@@ -46,7 +39,7 @@ describe('jut output', function()
 
 	it('defaults its batch size to 1000', function()
 	{
-		var output = new Output({ app_id: 'foo', target: 'http://localhost:3030' });
+		var output = new Output({ target: 'http://localhost:3030' });
 		output.must.have.property('batchSize');
 		output.batchSize.must.equal(1000);
 	});
@@ -74,9 +67,9 @@ describe('jut output', function()
 	it('must eventually call write with its buffer', function(done)
 	{
 		var output = new Output(goodOpts);
-		var saved = Request.post;
+		var saved = output.request;
 
-		Request.post = function(opts, cb)
+		output.request = function(opts, cb)
 		{
 			opts.must.be.an.object();
 			opts.json.must.be.true();
@@ -96,7 +89,7 @@ describe('jut output', function()
 				point.time.must.be.a.string();
 			}
 
-			Request.post = saved;
+			output.request = saved;
 			cb();
 
 			done();
@@ -113,7 +106,7 @@ describe('jut output', function()
 		var saved = Request.post;
 		var spy = sinon.spy(output.logger, 'error');
 
-		Request.post = function(opts, cb)
+		output.request = function(opts, cb)
 		{
 			output.batch.length.must.equal(0);
 			cb(new Error('oops'));
@@ -122,7 +115,7 @@ describe('jut output', function()
 			spy.calledTwice.must.be.true();
 			output.batch.length.must.be.at.least(2);
 			spy.restore();
-			Request.post = saved;
+			output.request = saved;
 
 			done();
 		};

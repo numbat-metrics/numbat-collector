@@ -57,7 +57,7 @@ describe('sink', function()
 
 	it('handles jut type', function()
 	{
-		var outputs = [{ type: 'jut', app_id: 'numbat-1', target: 'http://localhost:3030' }];
+		var outputs = [{ type: 'jut', target: 'http://localhost:3030' }];
 		var sink = new Sink(outputs);
 		sink.clients.must.be.an.array();
 		sink.clients.length.must.equal(1);
