@@ -29,6 +29,7 @@
     "bistre": "~1.0.1",
     "blanket": "~1.1.7",
     "bole": "~2.0.0",
+    "client-request": "~1.0.1",
     "dashdash": "~1.10.0",
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",

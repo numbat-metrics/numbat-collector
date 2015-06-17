@@ -8,7 +8,7 @@ The collector is a service. You are intended to run it anywhere you like, perhap
 
 [![npm](http://img.shields.io/npm/v/numbat-collector.svg?style=flat)](https://www.npmjs.org/package/numbat-collector) [![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector) ![Coverage](http://img.shields.io/badge/coverage-86%25-green.svg?style=flat)    [![Dependencies](https://david-dm.org/ceejbot/numbat-collector.svg)](https://david-dm.org/ceejbot/numbat-collector)
 
-Definitely pre 1.0; many error cases unhandled as yet.
+In production at npm.
 
 ### Running
 
