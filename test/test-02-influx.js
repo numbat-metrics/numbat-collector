@@ -18,7 +18,10 @@ MockClient.prototype.writePoint = function writePoint(n, p, cb)
 
 function writePointFail(n, p, cb)
 {
-	cb(new Error('oh dear I failed'));
+	process.nextTick(function()
+	{
+		cb(new Error('oh dear I failed'));
+	});
 }
 
 describe('influx client', function()
@@ -175,7 +178,7 @@ describe('influx client', function()
 				output.THROTTLE = 0; // stop throttling
 				output.write({ name: 'test', value: 4 }, function()
 				{
-					spy.calledThrice.must.be.true();
+					spy.lastCall.args[0].must.equal('1 error(s) writing points to influx suppressed');
 					done();
 				});
 			});
