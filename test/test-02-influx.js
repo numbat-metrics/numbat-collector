@@ -4,8 +4,9 @@
 var
 	_      = require('lodash'),
 	demand = require('must'),
+	sinon  = require('sinon'),
 	Influx = require('../lib/output-influx')
-	;
+;
 
 function MockClient() {}
 MockClient.prototype.writePoint = function writePoint(n, p, cb)
@@ -17,10 +18,7 @@ MockClient.prototype.writePoint = function writePoint(n, p, cb)
 
 function writePointFail(n, p, cb)
 {
-	process.nextTick(function()
-	{
-		cb(new Error('oh dear I failed'));
-	});
+	cb(new Error('oh dear I failed'));
 }
 
 describe('influx client', function()
@@ -148,15 +146,39 @@ describe('influx client', function()
 			count++;
 			if (count === 1)
 				arguments[0].must.equal('failure writing a point to influx:');
-			if (count === 2)
+			else if (count === 2)
 			{
 				arguments[0].must.be.instanceof(Error);
 				arguments[0].message.must.equal('oh dear I failed');
 				done();
 			}
+			else
+				console.log('wat');
 		};
 
 		output.write({ name: 'test', value: 4 }, function() { });
 	});
 
+	it('throttles frequent error log spam', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+		output.client.writePoint = writePointFail;
+
+		var spy = sinon.spy(output.log, 'error');
+		output.write({ name: 'test', value: 4 }, function()
+		{
+			spy.calledTwice.must.be.true();
+			output.write({ name: 'test', value: 4 }, function()
+			{
+				spy.calledThrice.must.be.false();
+				output.THROTTLE = 0; // stop throttling
+				output.write({ name: 'test', value: 4 }, function()
+				{
+					spy.calledThrice.must.be.true();
+					done();
+				});
+			});
+		});
+	});
 });
