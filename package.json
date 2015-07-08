@@ -37,7 +37,6 @@
     "replify": "~1.2.0"
   },
   "devDependencies": {
-    "bistre": "~1.0.0",
     "jscs": "~1.13.1",
     "jshint": "~2.8.0",
     "mkdirp": "~0.5.1",
