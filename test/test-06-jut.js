@@ -6,7 +6,7 @@ var
 	sinon   = require('sinon'),
 	Numbat  = require('../index'),
 	Output  = require('../lib/output-jut'),
-	Request = require('client-request')
+	Request = require('request')
 ;
 
 describe('jut output', function()
