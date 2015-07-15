@@ -18,7 +18,10 @@ MockClient.prototype.writePoint = function writePoint(n, p, cb)
 
 function writePointFail(n, p, cb)
 {
-	cb(new Error('oh dear I failed'));
+	process.nextTick(function()
+	{
+		cb(new Error('oh dear I failed'));
+	});
 }
 
 describe('influx client', function()
