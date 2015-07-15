@@ -18,10 +18,7 @@ MockClient.prototype.writePoint = function writePoint(n, p, cb)
 
 function writePointFail(n, p, cb)
 {
-	process.nextTick(function()
-	{
-		cb(new Error('oh dear I failed'));
-	});
+	cb(new Error('oh dear I failed'));
 }
 
 describe('influx client', function()
@@ -132,7 +129,8 @@ describe('influx client', function()
 			output.client.must.have.property('name');
 			output.client.name.must.equal('test');
 			output.client.must.have.property('point');
-			output.client.point.must.eql({ name: 'test', value: 4 });
+			output.client.point.name.must.equal('test');
+			output.client.point.value.must.equal(4);
 			done();
 		});
 	});
@@ -149,14 +147,16 @@ describe('influx client', function()
 			count++;
 			if (count === 1)
 				arguments[0].must.equal('failure writing a point to influx:');
-			else if (count === 2)
+			else if (count == 2)
+			{
+				arguments[0].must.equal('test');
+			}
+			else if (count === 3)
 			{
 				arguments[0].must.be.instanceof(Error);
 				arguments[0].message.must.equal('oh dear I failed');
 				done();
 			}
-			else
-				console.log('wat');
 		};
 
 		output.write({ name: 'test', value: 4 }, function() { });
@@ -171,10 +171,10 @@ describe('influx client', function()
 		var spy = sinon.spy(output.log, 'error');
 		output.write({ name: 'test', value: 4 }, function()
 		{
-			spy.calledTwice.must.be.true();
+			spy.calledThrice.must.be.true();
 			output.write({ name: 'test', value: 4 }, function()
 			{
-				spy.calledThrice.must.be.false();
+				spy.callCount.must.be.below(4);
 				output.THROTTLE = 0; // stop throttling
 				output.write({ name: 'test', value: 4 }, function()
 				{

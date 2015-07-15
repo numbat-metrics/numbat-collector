@@ -81,12 +81,13 @@ describe('jut output', function()
 			{
 				var point = opts.body[i];
 				point.must.be.an.object();
-				point.must.have.property('source_type');
-				point.source_type.must.equal('metric');
 				point.must.have.property('pid');
 				point.pid.must.equal(process.pid);
 				point.must.have.property('time');
 				point.time.must.be.a.string();
+				point.must.have.property('value');
+				point.value.must.be.a.number();
+				point.must.not.have.property('metric');
 			}
 
 			output.request = saved;
@@ -97,14 +98,14 @@ describe('jut output', function()
 
 		output.batchSize = 2;
 		output.write({ name: 'metric.one', value: 1 });
-		output.write({ name: 'metric.two', value: 2, host: 'localhost' });
+		output.write({ name: 'metric.two', metric: 2, host: 'localhost' });
 	});
 
 	it('handles write errors by retrying', function(done)
 	{
 		var output = new Output(goodOpts);
 		var saved = Request.post;
-		var spy = sinon.spy(output.logger, 'error');
+		var spy = sinon.spy(output.log, 'error');
 
 		output.request = function(opts, cb)
 		{
