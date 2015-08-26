@@ -170,9 +170,8 @@ describe('influx client', function()
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
 		output.client.writePoint = writePointFail;
-		output.log.error = function() {};
+		var spy = output.log.error = sinon.spy();
 
-		var spy = sinon.spy(output.log, 'error');
 		output.write({ name: 'test', value: 4 }, function()
 		{
 			spy.calledThrice.must.be.true();
@@ -182,7 +181,7 @@ describe('influx client', function()
 				output.THROTTLE = 0; // stop throttling
 				output.write({ name: 'test', value: 4 }, function()
 				{
-					spy.lastCall.args[0].must.match(/writing points to influx suppressed/);
+					spy.lastCall.args[0].must.match(/writing points to influx suppressed|oh dear/);
 					done();
 				});
 			});
