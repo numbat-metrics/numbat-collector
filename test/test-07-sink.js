@@ -3,9 +3,7 @@
 
 var
 	demand    = require('must'),
-	sinon     = require('sinon'),
 	Sink      = require('../lib/sink'),
-	stream    = require('stream'),
 	Analyzer  = require('../lib/output-analyzer'),
 	Graphite  = require('../lib/output-graphite'),
 	Influx    = require('../lib/output-influx'),
@@ -82,10 +80,11 @@ describe('sink', function()
 		sink.clients[0].must.be.instanceof(PrettyLog);
 	});
 
-	it('throws for an unknown type', function()
+	it('logs for an unknown type', function()
 	{
 		var outputs = [{ type: 'fleejob', name: 'numbat-1', pipe: true }];
 		var sink = new Sink(outputs);
+		sink.must.be.an.object();
 	});
 
 });

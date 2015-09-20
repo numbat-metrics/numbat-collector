@@ -57,7 +57,8 @@ describe('influx client', function()
 
 	it('demands a password option', function(done)
 	{
-		function shouldThrow() { return new Influx({
+		function shouldThrow() {
+			return new Influx({
 			hosts: ['localhost'],
 			username: 'foo',
 		}); }
@@ -150,7 +151,7 @@ describe('influx client', function()
 			count++;
 			if (count === 1)
 				arguments[0].must.equal('failure writing a point to influx:');
-			else if (count == 2)
+			else if (count === 2)
 			{
 				arguments[0].must.equal('test');
 			}

@@ -4,7 +4,6 @@
 var
 	demand  = require('must'),
 	sinon   = require('sinon'),
-	Numbat  = require('../index'),
 	Output  = require('../lib/output-jut'),
 	Request = require('request')
 ;

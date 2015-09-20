@@ -3,8 +3,6 @@
 
 var
 	demand    = require('must'),
-	bole      = require('bole'),
-	fs        = require('fs'),
 	LogOutput = require('../lib/output-logfile'),
 	mkdirp    = require('mkdirp'),
 	path      = require('path'),
@@ -57,7 +55,7 @@ describe('logfile output', function()
 	it('the path option is optional', function(done)
 	{
 		var consoleOut = new LogOutput({ name: 'test-2' });
-		output.write({ test: 'yes'}, function()
+		consoleOut.write({ test: 'yes'}, function()
 		{
 			done();
 		});
