@@ -3,8 +3,6 @@
 
 var
 	demand = require('must'),
-	bole   = require('bole'),
-	fs     = require('fs'),
 	Output = require('../lib/output-prettylog')
 ;
 

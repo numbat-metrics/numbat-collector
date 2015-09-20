@@ -4,7 +4,6 @@
 var
 	demand   = require('must'),
 	sinon    = require('sinon'),
-	Numbat   = require('../index'),
 	Graphite = require('../lib/output-graphite')
 	;
 
