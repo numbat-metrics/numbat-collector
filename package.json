@@ -33,7 +33,7 @@
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",
     "lodash": "~3.10.0",
-    "numbat-influx": "0.0.2",
+    "numbat-influx": "~0.0.3",
     "replify": "~1.2.0",
     "request": "~2.58.0"
   },
@@ -67,6 +67,7 @@
     "dev": "NODE_ENV=dev bin/run-server.js test/configs/devconfig.js",
     "lint": "eslint *.js lib/*.js test/*.js",
     "socket": "NODE_ENV=dev bin/run-server.js test/configs/socket-pretty.js",
+    "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "start": "node bin/run-server.js config.js",
     "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
     "test": "mocha -t 5000 --check-leaks --ui exports --require blanket -R mocoverage test/test-*.js",
