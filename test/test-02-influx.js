@@ -9,14 +9,14 @@ var
 ;
 
 function MockClient() {}
-MockClient.prototype.writePoint = function writePoint(n, p, cb)
+MockClient.prototype.writePoint = function writePoint(n, p, t, cb)
 {
 	this.name = n;
 	this.point = p;
 	process.nextTick(cb);
 };
 
-function writePointFail(n, p, cb)
+function writePointFail(n, p, t, cb)
 {
 	process.nextTick(function()
 	{
