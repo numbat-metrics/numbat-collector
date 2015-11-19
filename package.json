@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "bistre": "~1.0.1",
-    "blanket": "~1.1.7",
+    "blanket": "~1.2.1",
     "bole": "~2.0.0",
     "dashdash": "~1.10.0",
     "influx": "~3.4.0",
