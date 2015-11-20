@@ -44,7 +44,7 @@
     "mocoverage": "~1.0.0",
     "must": "~0.12.0",
     "repl-client": "~0.3.0",
-    "rimraf": "~2.4.1",
+    "rimraf": "~2.4.4",
     "sinon": "~1.15.4",
     "travis-cov": "~0.2.5"
   },
