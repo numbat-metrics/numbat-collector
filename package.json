@@ -32,7 +32,7 @@
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",
     "lodash": "~3.10.0",
-    "numbat-influx": "~0.0.3",
+    "numbat-influx": "~0.1.0",
     "replify": "~1.2.0",
     "request": "~2.58.0"
   },
