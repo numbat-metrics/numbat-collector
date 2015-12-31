@@ -28,7 +28,7 @@
   "dependencies": {
     "bistre": "~1.0.1",
     "bole": "~2.0.0",
-    "dashdash": "~1.10.0",
+    "dashdash": "~1.11.0",
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",
     "lodash": "~3.10.0",
