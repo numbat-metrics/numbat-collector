@@ -28,7 +28,6 @@
   "dependencies": {
     "bistre": "~1.0.1",
     "bole": "~2.0.0",
-    "dashdash": "~1.10.0",
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",
     "lodash": "~3.10.0",
@@ -38,7 +37,7 @@
   },
   "devDependencies": {
     "blanket": "~1.2.1",
-    "eslint": "~1.10.2",
+    "eslint": "~1.10.3",
     "mkdirp": "~0.5.1",
     "mocha": "~2.3.4",
     "mocoverage": "~1.0.0",
