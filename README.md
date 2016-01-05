@@ -80,7 +80,7 @@ When using the websocket option, the following additional parameters can be prov
 * `pathname` -- the path the websocket should be exposed at - default: '/'
 * `keepAliveFrequenzy` -- how often in milliseconds the server and client should exchange keep alive messages - default: 3000
 * `keepAliveTreshold` -- how many keep alive messages to be dropped before the socket connection is reset - default: 2
-* `verifyClient` -- a custom function to validate client access - default: no validation
+* `verifyClient` -- a custom function to validate client access [example](https://gist.github.com/trygve-lie/dbfee0d0886dde532b01) - default: no validation
 
 ## Outputs
 
