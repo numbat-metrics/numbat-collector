@@ -188,7 +188,7 @@ describe('collector', function()
 		it('should have tests');
 	});
 
-	describe('createWebsocketListener', function() 
+	describe('createWebsocketListener', function()
 	{
 		it('should have tests');
 	});
