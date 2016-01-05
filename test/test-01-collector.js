@@ -20,6 +20,17 @@ describe('collector', function()
 		outputs: []
 	};
 
+	var wsOpts =
+	{
+		listen:
+		{
+			ws:  true,
+			port: 4677,
+			host: 'localhost'
+		},
+		outputs: []
+	};
+
 	var socketOpts =
 	{
 		listen: { path: '/tmp/numbat.sock' },
@@ -111,6 +122,19 @@ describe('collector', function()
 			});
 		});
 
+		it('connects to a websocket if appropriate', function(done)
+		{
+			var collector = new Numbat(wsOpts);
+			var spy = sinon.spy(collector.incoming, 'listen');
+
+			collector.listen(function()
+			{
+				spy.called.must.be.true();
+				spy.calledWith(tcpOpts.listen.port, tcpOpts.listen.host).must.be.true;
+				collector.destroy(done);
+			});
+		});
+
 		it('connects to a socket if passed a path', function(done)
 		{
 			var collector = new Numbat(socketOpts);
@@ -160,6 +184,11 @@ describe('collector', function()
 	});
 
 	describe('onUDPPacket()', function()
+	{
+		it('should have tests');
+	});
+
+	describe('createWebsocketListener', function() 
 	{
 		it('should have tests');
 	});

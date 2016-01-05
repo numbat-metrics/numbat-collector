@@ -77,7 +77,7 @@ intended to do server to server communication and not browser to server communic
 
 When using the websocket option, the following additional parameters can be provided on the listener:
 
-* `pathname` -- the path the websocket should be exposed at - default: '/numbat-socket'
+* `pathname` -- the path the websocket should be exposed at - default: '/'
 * `keepAliveFrequenzy` -- how often in milliseconds the server and client should exchange keep alive messages - default: 3000
 * `keepAliveTreshold` -- how many keep alive messages to be dropped before the socket connection is reset - default: 2
 * `verifyClient` -- a custom function to validate client access - default: no validation
