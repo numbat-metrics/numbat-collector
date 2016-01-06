@@ -65,8 +65,22 @@ Logs JSON-formatted data to the console by default.
 * `listen: { host: '0.0.0.0', port: 3333 }` -- listen for incoming data over tcp on the given port
 * `listen: { host: 'localhost', port: 3333, udp: true }` -- listen for udp data
 * `listen: { path: '/path/to/foo.sock' }` -- connect to the given unix domain socket
+* `listen: { host: '0.0.0.0', port: 3333, ws: true }` -- listen for incoming data over a websocket on the given port
 
 These options are mutually exclusive.
+
+### Websocket specific options
+
+The websocket option is provided with the intention to provide a socket connection when running in 
+environemnts which restrict the use of raw TCP / UDP sockets. Ex certain PaaS providers. It is 
+intended to do server to server communication and not browser to server communication.
+
+When using the websocket option, the following additional parameters can be provided on the listener:
+
+* `pathname` -- the path the websocket should be exposed at - default: '/'
+* `keepAliveFrequenzy` -- how often in milliseconds the server and client should exchange keep alive messages - default: 3000
+* `keepAliveTreshold` -- how many keep alive messages to be dropped before the socket connection is reset - default: 2
+* `verifyClient` -- a custom function to validate client access [example](https://gist.github.com/trygve-lie/dbfee0d0886dde532b01) - default: no validation
 
 ## Outputs
 
