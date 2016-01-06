@@ -71,20 +71,21 @@ These options are mutually exclusive.
 
 ### Websocket specific options
 
-The websocket option is provided with the intention to provide a socket connection when running in 
-environemnts which restrict the use of raw TCP / UDP sockets. Ex certain PaaS providers. It is 
-intended to do server to server communication and not browser to server communication.
+Some running environments restrict the use of raw TCP or UDP sockets. In those situations you might use the websocket transport option instead. For example, certain PaaS providers restrict this. Use this for server-to-server communication, not browser-to-server communication.
+
+The websocket listener obeys these listener options:
 
 When using the websocket option, the following additional parameters can be provided on the listener:
 
 * `pathname` -- the path the websocket should be exposed at - default: '/'
-* `keepAliveFrequenzy` -- how often in milliseconds the server and client should exchange keep alive messages - default: 3000
-* `keepAliveTreshold` -- how many keep alive messages to be dropped before the socket connection is reset - default: 2
+* `keepAliveFrequency` -- how often in milliseconds the server and client should exchange keep alive messages - default: 3000
+* `keepAliveThreshold` -- how many keep alive messages to be dropped before the socket connection is reset - default: 2
 * `verifyClient` -- a custom function to validate client access [example](https://gist.github.com/trygve-lie/dbfee0d0886dde532b01) - default: no validation
 
 ## Outputs
 
-* `influx`: [InfluxDB](http://influxdb.org/): a time-series database that can drive interesting dashboards.
+* `influx`: [InfluxDB 0.8](http://influxdb.org/): a time-series database that can drive interesting dashboards.
+* `influx9`: InfluxDB 0.9, client provided by the [numbat-influx](https://github.com/ceejbot/numbat-influx) module
 * `logfile`: a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
 * `prettylog`: a pretty-formatted colorized console log
 * `analyzer`: [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
