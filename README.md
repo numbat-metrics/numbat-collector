@@ -1,12 +1,12 @@
 # Numbat
 
-[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-Powered Metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Numbat-Analyzer](https://github.com/ceejbot/numbat-analyzer) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all (yet). It merely multiplexes & buffers when necessary.
+[Numbat](http://www.arkive.org/numbat/myrmecobius-fasciatus/)-Powered Metrics system: monitoring, alerting, and historical analysis. The collector sits in front of [Numbat-Analyzer](https://github.com/numbat-metrics/numbat-analyzer) and [InfluxDB](http://influxdb.org/) in the same way that statsd sits in front of Graphite. This system, however, does absolutely no aggregation or manipulation of the data at all (yet). It merely multiplexes & buffers when necessary.
 
-See [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer) for more information on the system.
+See [numbat-analyzer](https://github.com/numbat-metrics/numbat-analyzer) for more information on the system.
 
 The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. You could run one on every hosts where you run services and communicate with it using a socket. Or you could run a few collectors and communicate using TCP or UDP.
 
-[![npm](http://img.shields.io/npm/v/numbat-collector.svg?style=flat)](https://www.npmjs.org/package/numbat-collector) [![Tests](http://img.shields.io/travis/ceejbot/numbat-collector.svg?style=flat)](http://travis-ci.org/ceejbot/numbat-collector) ![Coverage](http://img.shields.io/badge/coverage-86%25-green.svg?style=flat)    [![Dependencies](https://david-dm.org/ceejbot/numbat-collector.svg)](https://david-dm.org/ceejbot/numbat-collector)
+[![npm](http://img.shields.io/npm/v/numbat-collector.svg?style=flat)](https://www.npmjs.org/package/numbat-collector) [![Tests](http://img.shields.io/travis/numbat-metrics/numbat-collector.svg?style=flat)](http://travis-ci.org/numbat-metrics/numbat-collector) ![Coverage](http://img.shields.io/badge/coverage-86%25-green.svg?style=flat)    [![Dependencies](https://david-dm.org/numbat-metrics/numbat-collector.svg)](https://david-dm.org/numbat-metrics/numbat-collector)
 
 In production at npm.
 
@@ -85,10 +85,10 @@ When using the websocket option, the following additional parameters can be prov
 ## Outputs
 
 * `influx`: [InfluxDB 0.8](http://influxdb.org/): a time-series database that can drive interesting dashboards.
-* `influx9`: InfluxDB 0.9, client provided by the [numbat-influx](https://github.com/ceejbot/numbat-influx) module
+* `influx9`: InfluxDB 0.9, client provided by the [numbat-influx](https://github.com/numbat-metrics/numbat-influx) module
 * `logfile`: a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
 * `prettylog`: a pretty-formatted colorized console log
-* `analyzer`: [numbat-analyzer](https://github.com/ceejbot/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
+* `analyzer`: [numbat-analyzer](https://github.com/numbat-metrics/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
 * `graphite`: Graphite (plain graphite, not statsd)
 * `jut`: [Jut.io](http://www.jut.io)
 
