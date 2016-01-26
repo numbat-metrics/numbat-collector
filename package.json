@@ -7,7 +7,7 @@
     "numbatd": "./bin/run-server.js"
   },
   "bugs": {
-    "url": "https://github.com/ceejbot/numbat-collector/issues"
+    "url": "https://github.com/numbat-metrics/numbat-collector/issues"
   },
   "dependencies": {
     "bistre": "~1.0.1",
@@ -30,7 +30,7 @@
     "rimraf": "~2.5.0",
     "sinon": "~1.17.2"
   },
-  "homepage": "https://github.com/ceejbot/numbat-collector",
+  "homepage": "https://github.com/numbat-metrics/numbat-collector",
   "keywords": [
     "graphite",
     "influxdb",
@@ -42,7 +42,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ceejbot/numbat-collector.git"
+    "url": "git://github.com/numbat-metrics/numbat-collector.git"
   },
   "scripts": {
     "coverage": "nyc check-coverage --lines 80 --functions 60 --branches 80",
