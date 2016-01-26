@@ -96,7 +96,7 @@ You can have as many outputs as you want.
 
 ## Contributing
 
-Sure! Write tests with mocha & [must](https://www.npmjs.org/package/must). Use BSD/Allman bracing or I will stare at you funny and not take your pull request.
+Yes, please do! See our [contributing guide](https://github.com/numbat-metrics/documentation/blob/master/contributing.md) for basic rules of engagement.
 
 ## License
 
