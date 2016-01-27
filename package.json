@@ -34,7 +34,7 @@
     "numbat-influx": "~0.1.1",
     "ws": "1.0.1",
     "replify": "~1.2.0",
-    "request": "~2.67.0"
+    "request": "~2.68.0"
   },
   "devDependencies": {
     "blanket": "~1.2.1",
