@@ -40,7 +40,7 @@
     "blanket": "~1.2.1",
     "eslint": "~1.10.3",
     "mkdirp": "~0.5.1",
-    "mocha": "~2.3.4",
+    "mocha": "~2.4.2",
     "mocoverage": "~1.0.0",
     "must": "~0.13.1",
     "repl-client": "~0.3.0",
