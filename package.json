@@ -53,7 +53,7 @@
     "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
     "test": "nyc mocha -t 5000 --check-leaks --ui exports -R spec test/test-*.js",
     "coverage": "nyc check-coverage --lines 75 --functions 60 --branches 70",
-    "travis": "npm run lint && mocha -R spec -t 5000 test/test-*.js && npm run coverage",
+    "travis": "npm run lint && nyc mocha -R spec -t 5000 test/test-*.js && npm run coverage",
     "udp": "NODE_ENV=dev bin/run-server.js test/configs/udp-file.js",
     "udp-pretty": "NODE_ENV=dev bin/run-server.js test/configs/udp-pretty.js"
   }
