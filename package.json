@@ -9,22 +9,6 @@
   "bugs": {
     "url": "https://github.com/ceejbot/numbat-collector/issues"
   },
-  "config": {
-    "blanket": {
-      "pattern": [
-        "lib",
-        "index.js"
-      ],
-      "data-cover-never": [
-        "node_modules",
-        "test"
-      ],
-      "output-reporter": "spec",
-      "travis-cov": {
-        "threshold": 80
-      }
-    }
-  },
   "dependencies": {
     "bistre": "~1.0.1",
     "bole": "~2.0.0",
@@ -37,22 +21,19 @@
     "request": "~2.67.0"
   },
   "devDependencies": {
-    "blanket": "~1.2.1",
     "eslint": "~1.10.3",
     "mkdirp": "~0.5.1",
     "mocha": "~2.4.2",
-    "mocoverage": "~1.0.0",
     "must": "~0.13.1",
+    "nyc": "~5.5.0",
     "repl-client": "~0.3.0",
     "rimraf": "~2.5.0",
-    "sinon": "~1.17.2",
-    "travis-cov": "~0.2.5"
+    "sinon": "~1.17.2"
   },
   "homepage": "https://github.com/ceejbot/numbat-collector",
   "keywords": [
     "graphite",
     "influxdb",
-    "jut",
     "metrics",
     "monitoring",
     "numbat"
@@ -70,9 +51,9 @@
     "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "start": "node bin/run-server.js config.js",
     "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
-    "test": "mocha -t 5000 --check-leaks --ui exports --require blanket -R mocoverage test/test-*.js",
-    "test-cov": "mocha -t 5000 --require blanket -R travis-cov test/test-*.js",
-    "test-travis": "npm run lint && mocha -R spec -t 5000 test/test-*.js && npm run test-cov",
+    "test": "nyc mocha -t 5000 --check-leaks --ui exports -R spec test/test-*.js",
+    "coverage": "nyc check-coverage --lines 75 --functions 60 --branches 70",
+    "travis": "npm run lint && mocha -R spec -t 5000 test/test-*.js && npm run coverage",
     "udp": "NODE_ENV=dev bin/run-server.js test/configs/udp-file.js",
     "udp-pretty": "NODE_ENV=dev bin/run-server.js test/configs/udp-pretty.js"
   }

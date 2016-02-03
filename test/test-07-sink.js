@@ -7,7 +7,6 @@ var
 	Analyzer  = require('../lib/output-analyzer'),
 	Graphite  = require('../lib/output-graphite'),
 	Influx    = require('../lib/output-influx'),
-	Jut       = require('../lib/output-jut'),
 	Log       = require('../lib/output-logfile'),
 	PrettyLog = require('../lib/output-prettylog')
 ;
@@ -51,15 +50,6 @@ describe('sink', function()
 		sink.clients.must.be.an.array();
 		sink.clients.length.must.equal(1);
 		sink.clients[0].must.be.instanceof(Influx);
-	});
-
-	it('handles jut type', function()
-	{
-		var outputs = [{ type: 'jut', target: 'http://localhost:3030' }];
-		var sink = new Sink(outputs);
-		sink.clients.must.be.an.array();
-		sink.clients.length.must.equal(1);
-		sink.clients[0].must.be.instanceof(Jut);
 	});
 
 	it('handles logfile type', function()
