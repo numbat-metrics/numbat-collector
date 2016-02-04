@@ -44,7 +44,6 @@ module.exports =
             database: 'numbat'
         },
         { type: 'prettylog', name: 'foobar' },
-        { type: 'jut', target: 'http://uri-of-collector', batchSize: 500 },
         { type: 'graphite', host: 'localhost', port: 3333 },
     ]
 };
@@ -90,13 +89,12 @@ When using the websocket option, the following additional parameters can be prov
 * `prettylog`: a pretty-formatted colorized console log
 * `analyzer`: [numbat-analyzer](https://github.com/numbat-metrics/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
 * `graphite`: Graphite (plain graphite, not statsd)
-* `jut`: [Jut.io](http://www.jut.io)
 
 You can have as many outputs as you want.
 
 ## Contributing
 
-Sure! Write tests with mocha & [must](https://www.npmjs.org/package/must). Use BSD/Allman bracing or I will stare at you funny and not take your pull request.
+Yes, please do! See our [contributing guide](https://github.com/numbat-metrics/documentation/blob/master/contributing.md) for basic rules of engagement.
 
 ## License
 

@@ -7,23 +7,7 @@
     "numbatd": "./bin/run-server.js"
   },
   "bugs": {
-    "url": "https://github.com/ceejbot/numbat-collector/issues"
-  },
-  "config": {
-    "blanket": {
-      "pattern": [
-        "lib",
-        "index.js"
-      ],
-      "data-cover-never": [
-        "node_modules",
-        "test"
-      ],
-      "output-reporter": "spec",
-      "travis-cov": {
-        "threshold": 80
-      }
-    }
+    "url": "https://github.com/numbat-metrics/numbat-collector/issues"
   },
   "dependencies": {
     "bistre": "~1.0.1",
@@ -32,27 +16,24 @@
     "json-stream": "~1.0.0",
     "lodash": "~3.10.0",
     "numbat-influx": "~0.1.1",
-    "ws": "1.0.1",
     "replify": "~1.2.0",
-    "request": "~2.67.0"
+    "request": "~2.67.0",
+    "ws": "1.0.1"
   },
   "devDependencies": {
-    "blanket": "~1.2.1",
     "eslint": "~1.10.3",
     "mkdirp": "~0.5.1",
-    "mocha": "~2.4.2",
-    "mocoverage": "~1.0.0",
+    "mocha": "~2.4.5",
     "must": "~0.13.1",
+    "nyc": "~5.5.0",
     "repl-client": "~0.3.0",
     "rimraf": "~2.5.0",
-    "sinon": "~1.17.2",
-    "travis-cov": "~0.2.5"
+    "sinon": "~1.17.3"
   },
-  "homepage": "https://github.com/ceejbot/numbat-collector",
+  "homepage": "https://github.com/numbat-metrics/numbat-collector",
   "keywords": [
     "graphite",
     "influxdb",
-    "jut",
     "metrics",
     "monitoring",
     "numbat"
@@ -61,18 +42,18 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ceejbot/numbat-collector.git"
+    "url": "git://github.com/numbat-metrics/numbat-collector.git"
   },
   "scripts": {
+    "coverage": "nyc check-coverage --lines 75 --functions 60 --branches 80",
     "dev": "NODE_ENV=dev bin/run-server.js test/configs/devconfig.js",
+    "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "lint": "eslint *.js lib/*.js test/*.js",
     "socket": "NODE_ENV=dev bin/run-server.js test/configs/socket-pretty.js",
-    "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "start": "node bin/run-server.js config.js",
     "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
-    "test": "mocha -t 5000 --check-leaks --ui exports --require blanket -R mocoverage test/test-*.js",
-    "test-cov": "mocha -t 5000 --require blanket -R travis-cov test/test-*.js",
-    "test-travis": "npm run lint && mocha -R spec -t 5000 test/test-*.js && npm run test-cov",
+    "test": "nyc mocha -t 5000 --check-leaks --ui exports -R spec test/test-*.js",
+    "travis": "npm run lint && npm test && npm run coverage",
     "udp": "NODE_ENV=dev bin/run-server.js test/configs/udp-file.js",
     "udp-pretty": "NODE_ENV=dev bin/run-server.js test/configs/udp-pretty.js"
   }
