@@ -45,7 +45,7 @@
     "url": "git://github.com/numbat-metrics/numbat-collector.git"
   },
   "scripts": {
-    "coverage": "nyc check-coverage --lines 80 --functions 60 --branches 80",
+    "coverage": "nyc check-coverage --lines 75 --functions 60 --branches 80",
     "dev": "NODE_ENV=dev bin/run-server.js test/configs/devconfig.js",
     "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "lint": "eslint *.js lib/*.js test/*.js",
