@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const Numbat          = require('./lib/collector');
 Numbat.InfluxOutput   = require('./lib/output-influx');
