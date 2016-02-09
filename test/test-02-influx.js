@@ -128,7 +128,7 @@ describe('influx client', function()
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
 
-		output.write({ name: 'test', value: 4, obj: {}, fn: function(){}, arr : [] }, function()
+		output.write({ name: 'test', value: 4, obj: {}, fn: function() {}, arr : [] }, function()
 		{
 			output.client.must.have.property('name');
 			output.client.name.must.equal('test');
