@@ -128,13 +128,16 @@ describe('influx client', function()
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
 
-		output.write({ name: 'test', value: 4 }, function()
+		output.write({ name: 'test', value: 4, obj: {}, fn: function() {}, arr : [] }, function()
 		{
 			output.client.must.have.property('name');
 			output.client.name.must.equal('test');
 			output.client.must.have.property('point');
 			output.client.point.name.must.equal('test');
 			output.client.point.value.must.equal(4);
+			output.client.point.must.not.have.property('obj');
+			output.client.point.must.not.have.property('fn');
+			output.client.point.must.not.have.property('arr');
 			done();
 		});
 	});
