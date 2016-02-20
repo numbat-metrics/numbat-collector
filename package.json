@@ -17,11 +17,11 @@
     "lodash": "~4.5.0",
     "numbat-influx": "~0.1.1",
     "replify": "~1.2.0",
-    "request": "~2.67.0",
+    "request": "~2.69.0",
     "ws": "1.0.1"
   },
   "devDependencies": {
-    "eslint": "~2.2.0",
+    "eslint": "2.*",
     "mkdirp": "~0.5.1",
     "mocha": "~2.4.5",
     "must": "~0.13.1",
