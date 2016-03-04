@@ -2,7 +2,7 @@
 'use strict';
 
 var
-	_      = require('lodash'),
+	clone  = require('lodash.clone'),
 	demand = require('must'),
 	sinon  = require('sinon'),
 	Influx = require('../lib/output-influx')
@@ -90,7 +90,7 @@ describe('influx client', function()
 
 	it('respects a requestTimeout option if you provide one', function()
 	{
-		var opts = _.clone(mockopts);
+		var opts = clone(mockopts);
 		opts.requestTimeout = 50;
 		var output = new Influx(opts);
 		output.options.requestTimeout.must.equal(50);
