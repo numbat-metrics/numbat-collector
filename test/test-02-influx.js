@@ -142,6 +142,18 @@ describe('influx client', function()
 		});
 	});
 
+	it('write event to output with defined time property', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'test', value: 4, time: 1432292400000}, function()
+		{
+			output.client.point.must.have.property('time');
+			done();
+		});
+	});
+
 	it('handles failures by logging', function(done)
 	{
 		var output = new Influx(mockopts);
