@@ -7,6 +7,7 @@ var
 	Analyzer  = require('../lib/output-analyzer'),
 	Graphite  = require('../lib/output-graphite'),
 	Influx    = require('../lib/output-influx'),
+	Influx9   = require('numbat-influx'),
 	Log       = require('../lib/output-logfile'),
 	PrettyLog = require('../lib/output-prettylog')
 ;
@@ -50,6 +51,16 @@ describe('sink', function()
 		sink.clients.must.be.an.array();
 		sink.clients.length.must.equal(1);
 		sink.clients[0].must.be.instanceof(Influx);
+	});
+
+	it('handles influx9 type', function()
+	{
+		var outputs = [{ type: 'influxdb9', hosts: [ { host: 'localhost',  port: 8086 }],
+			username: 'numbat', password: 'my-top-secret', database: 'numbat' }];
+		var sink = new Sink(outputs);
+		sink.clients.must.be.an.array();
+		sink.clients.length.must.equal(1);
+		sink.clients[0].must.be.instanceof(Influx9);
 	});
 
 	it('handles logfile type', function()
