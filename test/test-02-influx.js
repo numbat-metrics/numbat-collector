@@ -57,11 +57,13 @@ describe('influx client', function()
 
 	it('demands a password option', function(done)
 	{
-		function shouldThrow() {
+		function shouldThrow()
+		{
 			return new Influx({
-			hosts: ['localhost'],
-			username: 'foo',
-		}); }
+				hosts: ['localhost'],
+				username: 'foo',
+			});
+		}
 		shouldThrow.must.throw(/password/);
 		done();
 	});
