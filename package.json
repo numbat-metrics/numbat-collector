@@ -21,7 +21,7 @@
     "ws": "1.0.1"
   },
   "devDependencies": {
-    "eslint": "2.9.0",
+    "eslint": "2.10.2",
     "mkdirp": "~0.5.1",
     "mocha": "~2.4.5",
     "must": "~0.13.1",
