@@ -14,7 +14,7 @@
     "bole": "~2.0.0",
     "influx": "~3.4.0",
     "json-stream": "~1.0.0",
-    "lodash": "~4.9.0",
+    "lodash": "~4.13.0",
     "numbat-influx": "~0.1.1",
     "replify": "~1.2.0",
     "request": "~2.70.0",
