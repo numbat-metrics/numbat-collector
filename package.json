@@ -18,7 +18,7 @@
     "numbat-influx": "~0.1.1",
     "replify": "~1.2.0",
     "request": "~2.70.0",
-    "ws": "1.0.1"
+    "ws": "1.1.0"
   },
   "devDependencies": {
     "eslint": "2.10.2",
