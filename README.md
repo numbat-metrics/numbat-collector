@@ -6,7 +6,7 @@ See [numbat-analyzer](https://github.com/numbat-metrics/numbat-analyzer) for mor
 
 The collector is a service. You are intended to run it anywhere you like, perhaps many instances of it. You could run one on every hosts where you run services and communicate with it using a socket. Or you could run a few collectors and communicate using TCP or UDP.
 
-[![npm](http://img.shields.io/npm/v/numbat-collector.svg?style=flat)](https://www.npmjs.org/package/numbat-collector) [![Tests](http://img.shields.io/travis/numbat-metrics/numbat-collector.svg?style=flat)](http://travis-ci.org/numbat-metrics/numbat-collector) ![Coverage](http://img.shields.io/badge/coverage-86%25-green.svg?style=flat)    [![Dependencies](https://david-dm.org/numbat-metrics/numbat-collector.svg)](https://david-dm.org/numbat-metrics/numbat-collector)
+[![npm](http://img.shields.io/npm/v/numbat-collector.svg?style=flat)](https://www.npmjs.org/package/numbat-collector) [![Tests](http://img.shields.io/travis/numbat-metrics/numbat-collector.svg?style=flat)](http://travis-ci.org/numbat-metrics/numbat-collector) [![Coverage](https://coveralls.io/repos/github/numbat-metrics/numbat-collector/badge.svg?branch=master)](https://coveralls.io/github/numbat-metrics/numbat-collector?branch=master)  [![Dependencies](https://david-dm.org/numbat-metrics/numbat-collector.svg)](https://david-dm.org/numbat-metrics/numbat-collector)
 
 In production at npm.
 
