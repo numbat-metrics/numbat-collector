@@ -21,6 +21,7 @@
     "ws": "1.1.0"
   },
   "devDependencies": {
+    "coveralls": "~2.11.14",
     "eslint": "2.13.1",
     "mkdirp": "~0.5.1",
     "mocha": "~3.1.0",
@@ -45,7 +46,7 @@
     "url": "git://github.com/numbat-metrics/numbat-collector.git"
   },
   "scripts": {
-    "coverage": "nyc check-coverage --lines 75 --functions 60 --branches 80",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "NODE_ENV=dev bin/run-server.js test/configs/devconfig.js",
     "influx": "NODE_ENV=dev bin/run-server.js test/configs/socket-influx9.js",
     "lint": "eslint *.js lib/*.js test/*.js",
@@ -53,7 +54,7 @@
     "start": "node bin/run-server.js config.js",
     "tcp": "NODE_ENV=dev bin/run-server.js test/configs/tcp-pretty.js",
     "test": "nyc mocha -t 5000 --check-leaks --ui exports -R spec test/test-*.js",
-    "travis": "npm run lint && npm test && npm run coverage",
+    "travis": "npm run lint && npm test",
     "udp": "NODE_ENV=dev bin/run-server.js test/configs/udp-file.js",
     "udp-pretty": "NODE_ENV=dev bin/run-server.js test/configs/udp-pretty.js"
   }
