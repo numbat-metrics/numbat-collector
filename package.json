@@ -17,7 +17,7 @@
     "lodash": "~4.16.2",
     "numbat-influx": "~0.1.1",
     "replify": "~1.2.0",
-    "request": "~2.75.0",
+    "request": "~2.76.0",
     "ws": "~1.1.1"
   },
   "devDependencies": {
