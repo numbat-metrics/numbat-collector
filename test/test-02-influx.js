@@ -6,17 +6,20 @@ var
 	demand = require('must'),
 	sinon  = require('sinon'),
 	Influx = require('../lib/output-influx')
-;
+	;
 
 function MockClient() {}
-MockClient.prototype.writePoint = function writePoint(n, p, cb)
+MockClient.prototype.writeSeries = function writeSeries(series, cb)
 {
-	this.name = n;
-	this.point = p;
+	this.series = series;
+	// Keep the old test API for the first data point.
+	this.name = Object.keys(series)[0];
+	this.point = series[this.name][0][0];
+	this.tags = series[this.name][0][1];
 	process.nextTick(cb);
 };
 
-function writePointFail(n, p, cb)
+function writeSeriesFail(series, cb)
 {
 	process.nextTick(function()
 	{
@@ -26,8 +29,7 @@ function writePointFail(n, p, cb)
 
 describe('influx client', function()
 {
-	var mockopts =
-	{
+	var mockopts = {
 		hosts:    [{ host: 'localhost', port:  8086 }],
 		username: 'numbat',
 		password: 'my-top-secret',
@@ -72,8 +74,7 @@ describe('influx client', function()
 	{
 		function shouldThrow()
 		{
-			return new Influx(
-			{
+			return new Influx({
 				hosts:    [ { host:'localhost', port:8086}],
 				username: 'foo',
 				password: 'password'
@@ -83,20 +84,12 @@ describe('influx client', function()
 		done();
 	});
 
-	it('defaults requestTimeout to 65 seconds', function()
-	{
-		var output = new Influx(mockopts);
-		output.options.requestTimeout.must.equal(65000);
-		output.client.request.defaultRequestOptions.timeout.must.equal(65000);
-	});
-
-	it('respects a requestTimeout option if you provide one', function()
+	it('respects a batchTimeout option if you provide one', function()
 	{
 		var opts = _.clone(mockopts);
-		opts.requestTimeout = 50;
+		opts.batchTimeout = 50;
 		var output = new Influx(opts);
-		output.options.requestTimeout.must.equal(50);
-		output.client.request.defaultRequestOptions.timeout.must.equal(50);
+		output.options.batchTimeout.must.equal(50);
 	});
 
 	it('must be a writable stream', function()
@@ -130,16 +123,89 @@ describe('influx client', function()
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
 
-		output.write({ name: 'test', value: 4, obj: {}, fn: function() {}, arr : [] }, function()
+		output.write({ name: 'test', value: 4, tag: 't' }, function()
 		{
 			output.client.must.have.property('name');
 			output.client.name.must.equal('test');
 			output.client.must.have.property('point');
-			output.client.point.name.must.equal('test');
+			output.client.point.must.be.an.object();
 			output.client.point.value.must.equal(4);
-			output.client.point.must.not.have.property('obj');
-			output.client.point.must.not.have.property('fn');
-			output.client.point.must.not.have.property('arr');
+			output.client.tags.must.be.an.object();
+			output.client.tags.tag.must.equal('t');
+			done();
+		});
+	});
+
+	it('cleans up tags', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'test', value: 4, status: 'ok', tag: 't', time: Date.now() }, function()
+		{
+			output.client.tags.must.be.an.object();
+			output.client.tags.must.not.have.property('time');
+			output.client.tags.must.not.have.property('value');
+			output.client.tags.status.must.equal('ok');
+			done();
+		});
+	});
+
+	it('does not write heartbeats', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'heartbeat', value: 4, status: 'ok', tag: 't', time: Date.now() }, function()
+		{
+			output.client.must.not.have.property('heartbeat');
+			done();
+		});
+	});
+
+	it('does not write points with no value', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'devalued', value: undefined, status: 'ok', tag: 't', time: Date.now() }, function()
+		{
+			output.client.must.not.have.property('devalued');
+			done();
+		});
+	});
+
+	it('has a tag sanitizer', function()
+	{
+		Influx.must.have.property('sanitizeTag');
+		Influx.sanitizeTag.must.be.a.function();
+		Influx.sanitizeTag('okay').must.equal('okay');
+		Influx.sanitizeTag('i-have-hyphens').must.equal('i_have_hyphens');
+		Influx.sanitizeTag('i have spaces').must.equal('i_have_spaces');
+	});
+
+	it('sanitizes tag names', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'i-am-invalid', value: 5, status: 'ok', tag: 't', time: Date.now() }, function()
+		{
+			output.client.name.must.equal('i-am-invalid');
+			done();
+		});
+	});
+
+	it('skips null & undefined tag values', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'i-am-invalid', value: 5, status: 'ok', undef: undefined, nully: null, time: Date.now() }, function()
+		{
+			output.client.tags.must.have.property('status');
+			output.client.tags.must.not.have.property('undef');
+			output.client.tags.must.not.have.property('nully');
 			done();
 		});
 	});
@@ -148,19 +214,15 @@ describe('influx client', function()
 	{
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
-		output.client.writePoint = writePointFail;
+		output.client.writeSeries = writeSeriesFail;
 
 		var count = 0;
 		output.log.error = function()
 		{
 			count++;
 			if (count === 1)
-				arguments[0].must.equal('failure writing a point to influx:');
+				arguments[0].must.equal('failure writing batch to influx:');
 			else if (count === 2)
-			{
-				arguments[0].must.equal('test');
-			}
-			else if (count === 3)
 			{
 				arguments[0].must.be.instanceof(Error);
 				arguments[0].message.must.equal('oh dear I failed');
@@ -175,15 +237,15 @@ describe('influx client', function()
 	{
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
-		output.client.writePoint = writePointFail;
+		output.client.writeSeries = writeSeriesFail;
 		var spy = output.log.error = sinon.spy();
 
 		output.write({ name: 'test', value: 4 }, function()
 		{
-			spy.calledThrice.must.be.true();
+			spy.calledTwice.must.be.true();
 			output.write({ name: 'test', value: 4 }, function()
 			{
-				spy.callCount.must.be.below(4);
+				spy.callCount.must.be.below(3);
 				output.THROTTLE = 0; // stop throttling
 				output.write({ name: 'test', value: 4 }, function()
 				{
@@ -192,5 +254,45 @@ describe('influx client', function()
 				});
 			});
 		});
+	});
+
+	it('batches events', function(done)
+	{
+		var opts = _.clone(mockopts);
+		opts.batchSize = 3;
+		var output = new Influx(opts);
+		output.client = new MockClient();
+
+		output.write({ name: 'test_a', value: 4 }, function() {});
+		output.write({ name: 'test_a', value: 7 }, function() {});
+		output.write({ name: 'test_b', value: 5 }, function()
+		{
+			Object.keys(output.client.series).length.must.be.equal(2);
+			output.client.series.test_a.must.be.an.object();
+			output.client.series.test_b.must.be.an.object();
+			output.client.series.test_a[0][0].value.must.be.equal(4);
+			output.client.series.test_b[0][0].value.must.be.equal(5);
+			output.batchLength.must.be.equal(0);
+			done();
+		});
+	});
+
+	it('sends an under-sized batch after the timeout expires', function(done)
+	{
+		var opts = _.clone(mockopts);
+		opts.batchSize = 1000;
+		opts.batchTimeout = 200; // in ms
+		var output = new Influx(opts);
+		output.client = new MockClient();
+
+		output.client.writeSeries = function(series, cb)
+		{
+			Object.keys(series).length.must.equal(1);
+			Date.now().must.be.below(start + 300);
+			done();
+		};
+
+		var start = Date.now();
+		output.write({ name: 'test_a', value: 4 });
 	});
 });
