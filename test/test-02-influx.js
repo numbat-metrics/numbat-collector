@@ -163,14 +163,28 @@ describe('influx client', function()
 		});
 	});
 
-	it('does not write points with no value', function(done)
+	it('fixes up points with undefined values', function(done)
 	{
 		var output = new Influx(mockopts);
 		output.client = new MockClient();
 
 		output.write({ name: 'devalued', value: undefined, status: 'ok', tag: 't', time: Date.now() }, function()
 		{
-			output.client.must.not.have.property('devalued');
+			output.client.series.must.have.property('devalued');
+			output.client.point.value.must.have.equal(1);
+			done();
+		});
+	});
+
+	it('fixes up points with null values', function(done)
+	{
+		var output = new Influx(mockopts);
+		output.client = new MockClient();
+
+		output.write({ name: 'devalued', value: null, status: 'ok', tag: 't', time: Date.now() }, function()
+		{
+			output.client.series.must.have.property('devalued');
+			output.client.point.value.must.have.equal(1);
 			done();
 		});
 	});
