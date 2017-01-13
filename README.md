@@ -83,8 +83,7 @@ When using the websocket option, the following additional parameters can be prov
 
 ## Outputs
 
-* `influx`: [InfluxDB 0.8](http://influxdb.org/): a time-series database that can drive interesting dashboards.
-* `influx9`: InfluxDB 0.9, client provided by the [numbat-influx](https://github.com/numbat-metrics/numbat-influx) module
+* `influx`: InfluxDB 0.9, client provided by the [numbat-influx](https://github.com/numbat-metrics/numbat-influx) module
 * `logfile`: a json-formatted logfile (using [bole](https://github.com/rvagg/bole)); in case you want logging for any reason
 * `prettylog`: a pretty-formatted colorized console log
 * `analyzer`: [numbat-analyzer](https://github.com/numbat-metrics/numbat-analyzer), the incomplete alerting & monitoring component of the numbat-powered metrics system.
