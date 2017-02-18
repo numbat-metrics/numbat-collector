@@ -27,7 +27,7 @@
     "must": "~0.13.1",
     "nyc": "~10.0.0",
     "repl-client": "~0.3.0",
-    "rimraf": "~2.5.0",
+    "rimraf": "~2.6.0",
     "sinon": "~1.17.3"
   },
   "homepage": "https://github.com/numbat-metrics/numbat-collector",
