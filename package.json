@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "coveralls": "~2.11.14",
-    "eslint": "~3.13.1",
+    "eslint": "~3.16.0",
     "mkdirp": "~0.5.1",
     "mocha": "~3.2.0",
     "must": "~0.13.1",
