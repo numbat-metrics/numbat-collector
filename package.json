@@ -12,7 +12,7 @@
   "dependencies": {
     "bistre": "~1.0.1",
     "bole": "~3.0.1",
-    "influx": "~4.2.0",
+    "influx": "~5.0.7",
     "json-stream": "~1.0.0",
     "lodash": "~4.17.2",
     "replify": "~1.2.0",
